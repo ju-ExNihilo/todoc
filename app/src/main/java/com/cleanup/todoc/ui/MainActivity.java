@@ -48,12 +48,6 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
     private List<Project> allProjects = new ArrayList<>();
 
     /**
-     * The sort method to be used to display tasks
-     */
-    @NonNull
-    private SortMethod sortMethod = SortMethod.NONE;
-
-    /**
      * Dialog to create a new task
      */
     @Nullable
@@ -111,19 +105,19 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
         int id = item.getItemId();
         switch (id){
             case R.id.filter_alphabetical:
-                sortMethod = SortMethod.ALPHABETICAL;
+                MySaveTaskViewModel.SORT_METHOD = SortMethod.ALPHABETICAL;
                 getAllMyTask();
                 break;
             case R.id.filter_alphabetical_inverted:
-                sortMethod = SortMethod.ALPHABETICAL_INVERTED;
+                MySaveTaskViewModel.SORT_METHOD = SortMethod.ALPHABETICAL_INVERTED;
                 getAllMyTask();
                 break;
             case R.id.filter_oldest_first:
-                sortMethod = SortMethod.OLD_FIRST;
+                MySaveTaskViewModel.SORT_METHOD = SortMethod.OLD_FIRST;
                 getAllMyTask();
                 break;
             case R.id.filter_recent_first:
-                sortMethod = SortMethod.RECENT_FIRST;
+                MySaveTaskViewModel.SORT_METHOD = SortMethod.RECENT_FIRST;
                 getAllMyTask();
                 break;
             default:
@@ -134,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
 
     @Override
     public void onDeleteTask(Task task) {
-       mySaveTaskViewModel.deleteTask(task.getId());
+        mySaveTaskViewModel.deleteTask(task.getId());
         getAllMyTask();
     }
 
@@ -142,7 +136,7 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
     private void configureViewModel(){
         ViewModelFactory mViewModelFactory = Injection.provideDaoViewModelFactory(this);
         this.mySaveTaskViewModel = new ViewModelProvider(this, mViewModelFactory).get(MySaveTaskViewModel.class);
-        this.mySaveTaskViewModel.init();
+        this.mySaveTaskViewModel.init(MySaveTaskViewModel.SORT_METHOD);
     }
 
     /**
@@ -220,8 +214,7 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
         } else {
             lblNoTasks.setVisibility(View.GONE);
             listTasks.setVisibility(View.VISIBLE);
-
-            listTasks.setAdapter(new TasksAdapter(tasks, allProjects,this));
+            listTasks.setAdapter(new TasksAdapter(tasks, mySaveTaskViewModel,this,this));
         }
     }
 
@@ -265,7 +258,7 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
 
     /** Get task from data base **/
     public void getAllMyTask(){
-        switch (sortMethod) {
+        switch (MySaveTaskViewModel.SORT_METHOD) {
             case ALPHABETICAL:
                 this.mySaveTaskViewModel.getTaskByAZ().observe(this, this::allMyTask);
                 break;
@@ -281,7 +274,6 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
             case NONE:
                 this.mySaveTaskViewModel.getAllTask().observe(this, this::allMyTask);
                 break;
-
         }
     }
     public void allMyTask(List<Task> tasks){
@@ -303,7 +295,7 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
     /**
      * List of all possible sort methods for task
      */
-    private enum SortMethod {
+    public enum SortMethod {
         /**
          * Sort alphabetical by name
          */

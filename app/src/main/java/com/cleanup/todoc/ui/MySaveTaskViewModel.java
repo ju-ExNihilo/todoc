@@ -22,6 +22,8 @@ public class MySaveTaskViewModel extends ViewModel {
     // DATA
     @Nullable
     private LiveData<List<Task>> currentTask;
+    private LiveData<List<Project>> currentProject;
+    public static MainActivity.SortMethod SORT_METHOD = MainActivity.SortMethod.NONE;
 
     public MySaveTaskViewModel(TaskDataRepository taskDataRepository, ProjectDataRepository projectDataRepository, Executor executor) {
         this.taskDataRepository = taskDataRepository;
@@ -29,11 +31,13 @@ public class MySaveTaskViewModel extends ViewModel {
         this.executor = executor;
     }
 
-    public void init() {
-        if (this.currentTask != null) {
+    public void init(MainActivity.SortMethod sortMethod) {
+        if (this.currentTask != null && this.currentProject != null && SORT_METHOD.equals(sortMethod)) {
             return;
         }
-        currentTask = taskDataRepository.getAllTask();
+        SORT_METHOD = sortMethod;
+        this.currentTask = taskDataRepository.getAllTask();
+        this.currentProject = projectDataRepository.getAllProject();
     }
 
     // -------------

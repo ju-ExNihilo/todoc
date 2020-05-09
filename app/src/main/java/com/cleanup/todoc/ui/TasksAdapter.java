@@ -1,14 +1,21 @@
 package com.cleanup.todoc.ui;
 
+import android.content.Context;
 import android.content.res.ColorStateList;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.RecyclerView;
 import com.cleanup.todoc.R;
+import com.cleanup.todoc.factory.ViewModelFactory;
+import com.cleanup.todoc.injection.Injection;
 import com.cleanup.todoc.model.Project;
 import com.cleanup.todoc.model.Task;
 
@@ -28,9 +35,13 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskViewHold
     private List<Task> tasks;
 
     /**
-     * The list of project
+     * The context of activity
      */
-    private List<Project> projects;
+    private Context context;
+    /**
+     * View Model
+     */
+    private MySaveTaskViewModel mySaveTaskViewModel;
 
     /**
      * The listener for when a task needs to be deleted
@@ -43,10 +54,11 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskViewHold
      *
      * @param tasks the list of tasks the adapter deals with to set
      */
-    TasksAdapter(@NonNull final List<Task> tasks, List<Project> projects, @NonNull final DeleteTaskListener deleteTaskListener) {
+    TasksAdapter(@NonNull final List<Task> tasks, MySaveTaskViewModel mySaveTaskViewModel,Context context, @NonNull final DeleteTaskListener deleteTaskListener) {
         this.tasks = tasks;
         this.deleteTaskListener = deleteTaskListener;
-        this.projects = projects;
+        this.mySaveTaskViewModel = mySaveTaskViewModel;
+        this.context = context;
     }
 
     @NonNull
@@ -58,13 +70,15 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskViewHold
 
     @Override
     public void onBindViewHolder(@NonNull TaskViewHolder taskViewHolder, int position) {
-        taskViewHolder.bind(tasks.get(position), projects.get((int) tasks.get(position).getProjectId()-1));
+        taskViewHolder.bind(tasks.get(position));
     }
 
     @Override
     public int getItemCount() {
         return tasks.size();
     }
+
+
 
     /**
      * Listener for deleting tasks
@@ -84,6 +98,7 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskViewHold
      * @author Gaëtan HERFRAY
      */
     class TaskViewHolder extends RecyclerView.ViewHolder {
+
         /**
          * The circle icon showing the color of the project
          */
@@ -135,13 +150,20 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskViewHold
          *
          * @param task the task to bind in the item view
          */
-        void bind(Task task,Project project_this) {
+        void bind(Task task) {
             lblTaskName.setText(task.getName());
             imgDelete.setTag(task);
+            this.getProject(task.getProjectId());
+        }
 
-            if (project_this != null) {
-                imgProject.setSupportImageTintList(ColorStateList.valueOf(project_this.getColor()));
-                lblProjectName.setText(project_this.getName());
+        private void getProject(long id){
+            mySaveTaskViewModel.getProject(id).observe((LifecycleOwner) context, this::thisProject);
+        }
+
+        private void thisProject(Project projects) {
+            if ( projects != null) {
+                imgProject.setSupportImageTintList(ColorStateList.valueOf( projects.getColor()));
+                lblProjectName.setText(projects.getName());
             } else {
                 imgProject.setVisibility(View.INVISIBLE);
                 lblProjectName.setText("");
