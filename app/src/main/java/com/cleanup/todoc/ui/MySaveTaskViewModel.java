@@ -3,12 +3,11 @@ package com.cleanup.todoc.ui;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
-
 import com.cleanup.todoc.model.Project;
 import com.cleanup.todoc.model.Task;
+import com.cleanup.todoc.model.TaskWithProject;
 import com.cleanup.todoc.repository.ProjectDataRepository;
 import com.cleanup.todoc.repository.TaskDataRepository;
-
 import java.util.List;
 import java.util.concurrent.Executor;
 
@@ -21,7 +20,7 @@ public class MySaveTaskViewModel extends ViewModel {
 
     // DATA
     @Nullable
-    private LiveData<List<Task>> currentTask;
+    private LiveData<List<TaskWithProject>> currentTask;
     private LiveData<List<Project>> currentProject;
     public static MainActivity.SortMethod SORT_METHOD = MainActivity.SortMethod.NONE;
 
@@ -49,16 +48,19 @@ public class MySaveTaskViewModel extends ViewModel {
 
     public LiveData<List<Project>> getAllProject() { return projectDataRepository.getAllProject();}
 
+    /** INSERT **/
+    public void insertProject(Project project){projectDataRepository.insertProject(project);}
+
     // -------------
     // FOR BOOKS
     // -------------
 
     /** GET **/
-    public LiveData<List<Task>> getTaskByAZ(){return taskDataRepository.getTaskByAZ();}
-    public LiveData<List<Task>> getTaskByZA(){return taskDataRepository.getTaskByZA();}
-    public LiveData<List<Task>> getTaskByNewer(){return taskDataRepository.getTaskByNewer();}
-    public LiveData<List<Task>> getTaskByOlder(){return taskDataRepository.getTaskByOlder();}
-    public LiveData<List<Task>> getAllTask(){return taskDataRepository.getAllTask();}
+    public LiveData<List<TaskWithProject>> getTaskByAZ(){return taskDataRepository.getTaskByAZ();}
+    public LiveData<List<TaskWithProject>> getTaskByZA(){return taskDataRepository.getTaskByZA();}
+    public LiveData<List<TaskWithProject>> getTaskByNewer(){return taskDataRepository.getTaskByNewer();}
+    public LiveData<List<TaskWithProject>> getTaskByOlder(){return taskDataRepository.getTaskByOlder();}
+    public LiveData<List<TaskWithProject>> getAllTask(){return taskDataRepository.getAllTask();}
 
     /** INSERT **/
     public void insertTask(Task task) {

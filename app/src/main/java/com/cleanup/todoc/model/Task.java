@@ -19,11 +19,12 @@ public class Task {
      * The unique identifier of the task
      */
     @PrimaryKey(autoGenerate = true)
-    private long id;
+    private long idTask;
 
     /**
      * The unique identifier of the project associated to the task
      */
+    @NonNull
     private long projectId;
 
     /**
@@ -38,7 +39,6 @@ public class Task {
      * The timestamp when the task has been created
      */
     private long creationTimestamp;
-
 
 
     /**
@@ -59,17 +59,17 @@ public class Task {
      *
      * @return the unique identifier of the task
      */
-    public long getId() {
-        return id;
+    public long getIdTask() {
+        return idTask;
     }
 
     /**
      * Sets the unique identifier of the task.
      *
-     * @param id the unique identifier of the task to set
+     * @param idTask the unique identifier of the task to set
      */
-    public void setId(long id) {
-        this.id = id;
+    public void setIdTask(long idTask) {
+        this.idTask = idTask;
     }
 
     /**

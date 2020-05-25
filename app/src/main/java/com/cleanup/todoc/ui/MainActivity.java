@@ -2,7 +2,6 @@ package com.cleanup.todoc.ui;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,7 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -19,14 +17,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.cleanup.todoc.R;
 import com.cleanup.todoc.factory.ViewModelFactory;
 import com.cleanup.todoc.injection.Injection;
 import com.cleanup.todoc.model.Project;
 import com.cleanup.todoc.model.Task;
+import com.cleanup.todoc.model.TaskWithProject;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -36,7 +33,7 @@ import java.util.List;
  *
  * @author Gaëtan HERFRAY
  */
-public class MainActivity extends AppCompatActivity implements TasksAdapter.DeleteTaskListener {
+public class MainActivity extends AppCompatActivity implements com.cleanup.todoc.ui.TasksAdapter.DeleteTaskListener {
 
     /**
      * View Model
@@ -127,8 +124,8 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
     }
 
     @Override
-    public void onDeleteTask(Task task) {
-        mySaveTaskViewModel.deleteTask(task.getId());
+    public void onDeleteTask(TaskWithProject task) {
+        mySaveTaskViewModel.deleteTask(task.getIdTask());
         getAllMyTask();
     }
 
@@ -207,14 +204,14 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
     /**
      * Updates the list of tasks in the UI
      */
-    private void updateTasks(List<Task> tasks) {
+    private void updateTasks(List<TaskWithProject> tasks) {
         if (tasks.size() == 0) {
             lblNoTasks.setVisibility(View.VISIBLE);
             listTasks.setVisibility(View.GONE);
         } else {
             lblNoTasks.setVisibility(View.GONE);
             listTasks.setVisibility(View.VISIBLE);
-            listTasks.setAdapter(new TasksAdapter(tasks, mySaveTaskViewModel,this,this));
+            listTasks.setAdapter(new TasksAdapter(tasks,this));
         }
     }
 
@@ -260,25 +257,23 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
     public void getAllMyTask(){
         switch (MySaveTaskViewModel.SORT_METHOD) {
             case ALPHABETICAL:
-                this.mySaveTaskViewModel.getTaskByAZ().observe(this, this::allMyTask);
+                this.mySaveTaskViewModel.getTaskByAZ().observe(this, this::updateTasks);
                 break;
             case ALPHABETICAL_INVERTED:
-                this.mySaveTaskViewModel.getTaskByZA().observe(this, this::allMyTask);
+                this.mySaveTaskViewModel.getTaskByZA().observe(this, this::updateTasks);
                 break;
             case RECENT_FIRST:
-                this.mySaveTaskViewModel.getTaskByNewer().observe(this, this::allMyTask);
+                this.mySaveTaskViewModel.getTaskByNewer().observe(this, this::updateTasks);
                 break;
             case OLD_FIRST:
-                this.mySaveTaskViewModel.getTaskByOlder().observe(this, this::allMyTask);
+                this.mySaveTaskViewModel.getTaskByOlder().observe(this, this::updateTasks);
                 break;
             case NONE:
-                this.mySaveTaskViewModel.getAllTask().observe(this, this::allMyTask);
+                this.mySaveTaskViewModel.getAllTask().observe(this, this::updateTasks);
                 break;
         }
     }
-    public void allMyTask(List<Task> tasks){
-       updateTasks(tasks);
-    }
+
     /*******************************/
 
     /**
@@ -317,4 +312,5 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
          */
         NONE
     }
+
 }
