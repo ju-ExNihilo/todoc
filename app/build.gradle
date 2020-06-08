@@ -3,16 +3,16 @@ apply plugin: 'com.android.application'
 android {
     signingConfigs {
         sign {
-            storeFile file('C:\\Users\\juju_\\Desktop\\KeyStore\\todoc1.jks')
+            storeFile file('C:\\Users\\juju_\\Desktop\\KeyStore\\todoc.jks')
             storePassword 'Cantona1'
-            keyAlias = 'todoc_key1'
+            keyAlias = 'todoc_key'
             keyPassword 'Cantona1'
         }
     }
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
     defaultConfig {
-        applicationId "com.cleanup.todoc"
+        applicationId "com.cleanup.julien.todoc"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1

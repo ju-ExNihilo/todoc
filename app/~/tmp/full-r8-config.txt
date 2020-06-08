@@ -144,7 +144,7 @@
 # Referenced at C:\Users\juju_\AndroidStudioProjects\todoc-master\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:29
 -keep class androidx.room.MultiInstanceInvalidationService { <init>(); }
 # Referenced at C:\Users\juju_\AndroidStudioProjects\todoc-master\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:19
--keep class com.cleanup.todoc.ui.MainActivity { <init>(); }
+-keep class com.cleanup.julien.todoc.ui.MainActivity { <init>(); }
 # Referenced at C:\Users\juju_\.gradle\caches\transforms-2\files-2.1\ef8a364a6a39421e69c96cf68eeb3e63\appcompat-1.1.0\res\layout\abc_alert_dialog_button_bar_material.xml:43
 # Referenced at C:\Users\juju_\.gradle\caches\transforms-2\files-2.1\ef8a364a6a39421e69c96cf68eeb3e63\appcompat-1.1.0\res\layout\abc_alert_dialog_material.xml:52
 # Referenced at C:\Users\juju_\.gradle\caches\transforms-2\files-2.1\ef8a364a6a39421e69c96cf68eeb3e63\appcompat-1.1.0\res\layout\abc_alert_dialog_title_material.xml:57

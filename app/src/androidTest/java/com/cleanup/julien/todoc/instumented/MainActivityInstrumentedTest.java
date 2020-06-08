@@ -1,4 +1,4 @@
-package com.cleanup.todoc.instumented;
+package com.cleanup.julien.todoc.instumented;
 
 import android.view.View;
 import android.widget.TextView;
@@ -6,10 +6,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.test.espresso.matcher.RootMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
-
-import com.cleanup.todoc.R;
-import com.cleanup.todoc.ui.MainActivity;
-import com.cleanup.todoc.ui.MySaveTaskViewModel;
+import com.cleanup.julien.todoc.R;
+import com.cleanup.julien.todoc.ui.MainActivity;
+import com.cleanup.julien.todoc.ui.MySaveTaskViewModel;
 import org.hamcrest.CoreMatchers;
 import org.junit.Before;
 import org.junit.Rule;

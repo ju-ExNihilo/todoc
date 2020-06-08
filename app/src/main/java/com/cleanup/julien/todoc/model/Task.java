@@ -1,4 +1,4 @@
-package com.cleanup.todoc.model;
+package com.cleanup.julien.todoc.model;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;

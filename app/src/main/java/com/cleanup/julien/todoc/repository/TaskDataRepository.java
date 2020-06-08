@@ -1,9 +1,9 @@
-package com.cleanup.todoc.repository;
+package com.cleanup.julien.todoc.repository;
 
 import androidx.lifecycle.LiveData;
-import com.cleanup.todoc.database.TaskDao;
-import com.cleanup.todoc.model.Task;
-import com.cleanup.todoc.model.TaskWithProject;
+import com.cleanup.julien.todoc.database.TaskDao;
+import com.cleanup.julien.todoc.model.Task;
+import com.cleanup.julien.todoc.model.TaskWithProject;
 import java.util.List;
 
 public class TaskDataRepository {

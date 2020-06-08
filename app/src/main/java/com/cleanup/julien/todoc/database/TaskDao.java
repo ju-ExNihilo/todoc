@@ -1,12 +1,12 @@
-package com.cleanup.todoc.database;
+package com.cleanup.julien.todoc.database;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
-import com.cleanup.todoc.model.Task;
-import com.cleanup.todoc.model.TaskWithProject;
+import com.cleanup.julien.todoc.model.Task;
+import com.cleanup.julien.todoc.model.TaskWithProject;
 import java.util.List;
 
 @Dao

@@ -1,4 +1,4 @@
-package com.cleanup.todoc.database;
+package com.cleanup.julien.todoc.database;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -8,8 +8,8 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
-import com.cleanup.todoc.model.Project;
-import com.cleanup.todoc.model.Task;
+import com.cleanup.julien.todoc.model.Project;
+import com.cleanup.julien.todoc.model.Task;
 
 
 @Database(entities = {Project.class, Task.class}, version = 1, exportSchema = false)

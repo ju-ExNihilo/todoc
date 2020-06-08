@@ -1,4 +1,4 @@
-package com.cleanup.todoc.ui;
+package com.cleanup.julien.todoc.ui;
 
 import android.content.res.ColorStateList;
 import android.view.LayoutInflater;
@@ -8,8 +8,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
-import com.cleanup.todoc.R;
-import com.cleanup.todoc.model.TaskWithProject;
+import com.cleanup.julien.todoc.R;
+import com.cleanup.julien.todoc.model.TaskWithProject;
 import java.util.List;
 
 /**
@@ -111,7 +111,7 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskViewHold
          *  @param itemView the view of the task item
          * @param deleteTaskListener the listener for when a task needs to be deleted to set
          */
-        TaskViewHolder(@NonNull View itemView, com.cleanup.todoc.ui.TasksAdapter.DeleteTaskListener deleteTaskListener) {
+        TaskViewHolder(@NonNull View itemView, com.cleanup.julien.todoc.ui.TasksAdapter.DeleteTaskListener deleteTaskListener) {
             super(itemView);
             imgProject = itemView.findViewById(R.id.img_project);
             lblTaskName = itemView.findViewById(R.id.lbl_task_name);

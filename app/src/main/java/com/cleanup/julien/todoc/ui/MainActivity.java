@@ -1,4 +1,4 @@
-package com.cleanup.todoc.ui;
+package com.cleanup.julien.todoc.ui;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -17,12 +17,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.cleanup.todoc.R;
-import com.cleanup.todoc.factory.ViewModelFactory;
-import com.cleanup.todoc.injection.Injection;
-import com.cleanup.todoc.model.Project;
-import com.cleanup.todoc.model.Task;
-import com.cleanup.todoc.model.TaskWithProject;
+import com.cleanup.julien.todoc.R;
+import com.cleanup.julien.todoc.factory.ViewModelFactory;
+import com.cleanup.julien.todoc.injection.Injection;
+import com.cleanup.julien.todoc.model.Project;
+import com.cleanup.julien.todoc.model.Task;
+import com.cleanup.julien.todoc.model.TaskWithProject;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -33,7 +33,7 @@ import java.util.List;
  *
  * @author Gaëtan HERFRAY
  */
-public class MainActivity extends AppCompatActivity implements com.cleanup.todoc.ui.TasksAdapter.DeleteTaskListener {
+public class MainActivity extends AppCompatActivity implements com.cleanup.julien.todoc.ui.TasksAdapter.DeleteTaskListener {
 
     /**
      * View Model

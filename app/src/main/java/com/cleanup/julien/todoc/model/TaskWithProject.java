@@ -1,4 +1,4 @@
-package com.cleanup.todoc.model;
+package com.cleanup.julien.todoc.model;
 
 public class TaskWithProject {
     private long idTask;

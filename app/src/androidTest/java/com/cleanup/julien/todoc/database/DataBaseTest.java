@@ -1,16 +1,16 @@
-package com.cleanup.todoc.database;
+package com.cleanup.julien.todoc.database;
 
 import android.content.Context;
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import androidx.room.Room;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
-import com.cleanup.todoc.model.Project;
-import com.cleanup.todoc.model.Task;
-import com.cleanup.todoc.model.TaskWithProject;
-import com.cleanup.todoc.repository.ProjectDataRepository;
-import com.cleanup.todoc.repository.TaskDataRepository;
-import com.cleanup.todoc.ui.MySaveTaskViewModel;
+import com.cleanup.julien.todoc.model.Project;
+import com.cleanup.julien.todoc.model.Task;
+import com.cleanup.julien.todoc.model.TaskWithProject;
+import com.cleanup.julien.todoc.repository.ProjectDataRepository;
+import com.cleanup.julien.todoc.repository.TaskDataRepository;
+import com.cleanup.julien.todoc.ui.MySaveTaskViewModel;
 import com.cleanup.utils.LiveDataTestUtil;
 import org.junit.After;
 import org.junit.Before;
