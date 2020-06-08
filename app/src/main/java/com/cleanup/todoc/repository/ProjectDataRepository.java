@@ -17,5 +17,4 @@ public class ProjectDataRepository {
 
     public void insertProject(Project project){ this.projectDao.insertProject(project);}
 
-
 }

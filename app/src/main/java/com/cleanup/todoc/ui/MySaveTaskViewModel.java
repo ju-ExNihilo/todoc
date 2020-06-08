@@ -52,7 +52,7 @@ public class MySaveTaskViewModel extends ViewModel {
     public void insertProject(Project project){projectDataRepository.insertProject(project);}
 
     // -------------
-    // FOR BOOKS
+    // FOR Task
     // -------------
 
     /** GET **/
@@ -75,5 +75,4 @@ public class MySaveTaskViewModel extends ViewModel {
             taskDataRepository.deleteTask(id);
         });
     }
-
 }
